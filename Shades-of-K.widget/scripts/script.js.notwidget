@@ -1,0 +1,284 @@
+$(document).ready(function () {
+    run();
+});
+
+function run() {
+
+    //time data generator //
+    var date = new Date();
+    var hours = date.getHours();
+    var properTime = null;
+
+    var theHours = (hours > 9 ? hours : "0" + hours);
+    var theMins = (date.getMinutes() > 9 ? date.getMinutes() : "0" + date.getMinutes());
+    var theSec = (date.getSeconds() > 9 ? date.getSeconds() : "0" + date.getSeconds());
+
+    var hoursSplit = "" + theHours / 10;
+    hoursSplit = hoursSplit <= 9 ? hoursSplit + ".0" : hoursSplit;
+    hoursSplit = hoursSplit.split(".");
+    var hourOne = hoursSplit[0];
+    var hourTwo = hoursSplit[1];
+
+    var minsSplit = "" + theMins / 10;
+    minsSplit = minsSplit <= 9 ? minsSplit + ".0" : minsSplit;
+    minsSplit = minsSplit.split(".");
+    var minOne = minsSplit[0];
+    var minTwo = minsSplit[1];
+
+    var bigTime = hourOne + hourTwo + ":" + minOne + minTwo + ":" + theSec;
+    if (!(displayseconds)) {
+        bigTime = hourOne + hourTwo + ":" + minOne + minTwo;
+    }
+
+
+    // supertime(tm) value calculator //
+    var supertime = (Number(theHours) * 3600) + (Number(theMins) * 60) + Number(theSec);
+
+
+    //start of color-time-generator//
+
+    // Two different run-times if time is more or less then one minute //
+    var speed = NumberOfMinutesInCycleForHUE;
+    if (speed > 1) {
+        // more then one minute //
+        //convert supertime and input value into a hue //
+        var y = speed * 60;
+        var z = 86400 / y;
+
+        var t = supertime / y;
+        var v = Math.floor(t);
+        var w = t - v;
+
+        var u = supertime - (v * y);
+        var huefraction = u / y;
+
+
+        var huecalc = 360 * huefraction;
+    } else {
+        // less then one minute //
+        // convert miliseconds to hue at ratio //
+        var today = new Date();
+        var milisecs = today.getMilliseconds();
+        var supertimemili = (theSec * 1000) + milisecs;
+
+        var y = speed * 60000;
+        var z = 60000 / y;
+
+        var t = supertimemili / y;
+        var v = Math.floor(t);
+        var w = t - v;
+
+        var u = supertimemili - (v * y);
+        var huefraction = u / y;
+
+
+        var huecalc = 360 * huefraction;
+
+    }
+
+    // Two different run-times if time is more or less then one minute //
+    var speed2 = NumberOfMinutesInCycleForLightness;
+    if (speed2 > 1) {
+        // more then one minute //
+        //convert supertime and input value into a hue //
+        var y2 = speed2 * 60;
+        var z2 = 86400 / y2;
+
+        var t2 = supertime / y2;
+        var v2 = Math.floor(t2);
+        var w2 = t2 - v2;
+
+        var u2 = supertime - (v2 * y2);
+        var lightnessfraction2 = u2 / y2;
+
+
+        var lightnesscalc = MinlightnessFrom0To100 + ((MaxlightnessFrom0To100 - MinlightnessFrom0To100) * lightnessfraction2);
+    } else {
+        // less then one minute //
+        // convert miliseconds to hue at ratio //
+        var today = new Date();
+        var milisecs = today.getMilliseconds();
+        var supertimemili = (theSec * 1000) + milisecs;
+
+        var y2 = speed2 * 60000;
+        var z2 = 60000 / y2;
+
+        var t2 = supertimemili / y2;
+        var v2 = Math.floor(t2);
+        var w2 = t2 - v2;
+
+        var u2 = supertimemili - (v2 * y2);
+        var lightnessfraction2 = u2 / y2;
+
+
+        var lightnesscalc = MinlightnessFrom0To100 + ((MaxlightnessFrom0To100 - MinlightnessFrom0To100) * lightnessfraction2);
+
+    }
+
+    // Two different run-times if time is more or less then one minute //
+    var speed3 = NumberOfMinutesInCycleForSaturation;
+    if (speed3 > 1) {
+        // more then one minute //
+        //convert supertime and input value into a hue //
+        var y3 = speed3 * 60;
+        var z3 = 86400 / y3;
+
+        var t3 = supertime / y3;
+        var v3 = Math.floor(t3);
+        var w3 = t3 - v3;
+
+        var u3 = supertime - (v3 * y3);
+        var Saturationfraction3 = u3 / y3;
+
+
+        var Saturationcalc = MinSaturationFrom0To100 + ((MaxSaturationFrom0To100 - MinSaturationFrom0To100) * Saturationfraction3);
+    } else {
+        // less then one minute //
+        // convert miliseconds to hue at ratio //
+        var today = new Date();
+        var milisecs = today.getMilliseconds();
+        var supertimemili = (theSec * 1000) + milisecs;
+
+        var y3 = speed3 * 60000;
+        var z3 = 60000 / y3;
+
+        var t3 = supertimemili / y3;
+        var v3 = Math.floor(t3);
+        var w3 = t3 - v3;
+
+        var u3 = supertimemili - (v3 * y3);
+        var Saturationfraction3 = u3 / y3;
+
+
+        var Saturationcalc = MinSaturationFrom0To100 + ((MaxSaturationFrom0To100 - MinSaturationFrom0To100) * Saturationfraction3);
+
+    }
+
+    //end of color-time-generator//
+
+
+    //codetextopacity
+    var opacitystring = "rgba(0,0,0," + OpacityOfColorHexCodes + ")";
+
+
+    //hsl color calculations//
+    var h = huecalc;
+    var s = Saturationcalc;
+    var l = lightnesscalc;
+
+
+//	Get battery level if possible
+//	navigator.getBattery().then(function(battery) {
+//  battery.addEventListener('levelchange', function() {
+//    // Do stuff when the level changes, you can get it
+//    // from battery.level
+//    window.batt = (battery.level*100);
+//  });
+//  	window.batt = (battery.level*100);
+//});
+//
+//
+////     battery for values //
+//    if (UseBatteryforHue == true) {
+//        var h = window.batt * 36;
+//    } else {
+//        var h = h;
+//    }
+//    if (UseBatteryforSaturation == true) {
+//        var s = window.batt;
+//    } else {
+//        var s = s;
+//    }
+//    if (UseBatteryforLightness == true) {
+//        var l = window.batt;
+//    } else {
+//        var l = l;
+//    }
+
+    // Overides //
+    if (HueOveride == true) {
+        var h = HueOverideValue0To360;
+    } else {
+        var h = h;
+    }
+
+    if (SaturationOveride == true) {
+        var s = SaturationOverideValue0To100;
+    } else {
+        var s = s;
+    }
+
+    if (LightnessOveride == true) {
+        var l = LightnessOverideValue0To100;
+    } else {
+        var l = l;
+    }
+
+
+    // Luminosity gradient generator//
+    var lumRange = LightnessRangeFrom0to100;
+    var lumGrad = (lumRange / NumberOfBands);
+
+
+
+    //color range gradient generator//
+    var CrngGrad = (ColorRangeFrom0To360 / NumberOfBands);
+
+    //color range gradient generator//
+    var SatGrad = (SaturationRangeFrom0to100 / NumberOfBands);
+
+    // color band maker vars //
+    var i = 1;
+    var g = 0;
+
+
+    // hue gradient color-band generator //
+    for (i = 1; i <= NumberOfBands; i++) {
+        this["h" + i] = (Number(h) - CrngGrad * i);
+        if (this["h" + i] < 0) {
+            Number(this["h" + i]) + 360;
+        }
+    }
+
+    // lightness gradient color-band generator //
+    for (i = 1; i <= NumberOfBands; i++) {
+        this["l" + i] = Number(l) - (lumGrad * i);
+    }
+
+    // saturation gradient color-band generator //
+    for (i = 1; i <= NumberOfBands; i++) {
+        this["s" + i] = Number(s) - (SatGrad * i);
+    }
+
+    // full band srting generator //
+    for (i = 1, g = 1; i <= NumberOfBands; i++, g++) {
+        this["colorband" + i] = "hsl" + "(" + this["h" + i] + "," + this["s" + i] + "%," + this["l" + i] + "%)";
+    }
+
+    //inserting into html/css //
+    $("body").css('background-color', this["colorband" + NumberOfBands]);
+    $(".slices").css('color', opacitystring);
+    $(".slices").css('-webkit-flex-direction', ColumnOrRow);
+    $(".slices").css('flex-direction', ColumnOrRow);
+
+    //inserting css bands //
+
+    for (i = 1; i <= NumberOfBands; i++) {
+        var color = tinycolor(this["colorband" + i]);
+        this["bandhex" + i] = color.toHexString();
+    }
+
+    for (i = 1; i <= NumberOfBands; i++) {
+        $(".slice1").html('<br>' + this["bandhex1"]);
+        $(".slice" + i).css('background-color', this["colorband" + i]);
+        $(".slice" + i).css('flex', 1);
+        $(".slice" + i).css('display', "-webkit-flex;");
+        $(".slice" + i).html(this["bandhex" + i]);
+    }
+
+    if (speed < 1.001 || speed2 < 1.001 || speed3 < 1.001) {
+        setTimeout("run();", 100);
+    } else {
+        setTimeout("run();", 1000);
+    }
+}

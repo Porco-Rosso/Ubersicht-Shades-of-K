@@ -1,0 +1,80 @@
+// Porco Rosso, 2017 - for use with Ubersicht macOS app
+// Config below to liking
+
+// color code text opacity from 0 to 1 ; Default = 0//
+var OpacityOfColorHexCodes = 0.5;
+
+//number of bands ; Default = 8 //
+var NumberOfBands = 8;
+
+//Do you want Row or Column ? ; Default = 'Column' //
+var ColumnOrRow = 'Column';
+
+
+//////////////////////////////////////////////////////////////// Advanced Settings below /////
+
+///////////////////////////Hue////
+// speed of change (how many minues to cylce through all colors) ; Default = 1 //
+// hint! 1 for one minute, 60 for one hour, 86400 for a day!  //
+// warning, values at one minute or below may cause increased battery drain! but so far I haven't seen any effect //
+var NumberOfMinutesInCycleForHUE = 1;
+
+//color range displayed at once 0-360 ; Default = 80//
+// hint! 0 is one color, 360 is the entire color spectrum //
+var ColorRangeFrom0To360 = 40;
+
+
+//////////////////////////Lightness////
+// how many minutes it takes to go from min lightness to the max lightness ; Default = 60 //
+var NumberOfMinutesInCycleForLightness = 60;
+
+//Max lightness 0 - 100 ; Default = 70//
+var MaxlightnessFrom0To100 = 70;
+
+//Min lightness 0 - 100 ; Default = 30//
+var MinlightnessFrom0To100 = 20;
+
+//lightness gradient (max to min) ; Default = 25 //
+// the lightness gradient value: 0 means no lightness gradient //
+// hint! should be set smaller or equal to the ligtness value If you don't want the bottom to be black //
+var LightnessRangeFrom0to100 = 23;
+
+
+//////////////////////////Saturation////
+// how many minutes it takes to go from grey to the max saturation ; Default = 10 //
+var NumberOfMinutesInCycleForSaturation = 10;
+
+//Max Saturation 0 - 100 ; Default = 55//
+var MaxSaturationFrom0To100 = 55;
+
+//Min Saturation 0 - 100 ; Default = 20//
+var MinSaturationFrom0To100 = 20;
+
+//Saturation gradient (max to min) 0 - 100 ; Default = 0//
+// the Saturation gradient value: 0 means no Saturation gradient //
+// Hint! should be at smaller or equal to the range between max and min of the Saturation value If you don't want the bottom to be grey //
+var SaturationRangeFrom0to100 = 0;
+
+
+// Use battery percentage for values //
+// The more battery, the more saturated or light
+var UseBatteryforHue = false;
+var UseBatteryforSaturation = false;
+var UseBatteryforLightness = false;
+
+
+//////////////////////////////////////////////////////////////// Overide Settings below //////
+//Overide Hue	0-360 //
+// set HueOveride to true to overide hue value //
+var HueOveride = false;
+var HueOverideValue0To360 = 360;
+
+//Overide Saturation   0-360 //
+// set HueOveride to true to overide hue value //
+var SaturationOveride = false;
+var SaturationOverideValue0To100 = 40;
+
+//Overide Saturation   0-360 //
+// set HueOveride to true to overide hue value //
+var LightnessOveride = false;
+var LightnessOverideValue0To100 = 35;
