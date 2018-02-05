@@ -25,10 +25,7 @@ function run() {
     var minOne = minsSplit[0];
     var minTwo = minsSplit[1];
 
-    var bigTime = hourOne + hourTwo + ":" + minOne + minTwo + ":" + theSec;
-    if (!(displayseconds)) {
-        bigTime = hourOne + hourTwo + ":" + minOne + minTwo;
-    }
+
 
 
     // supertime(tm) value calculator //
@@ -168,32 +165,24 @@ function run() {
 
 
 //	Get battery level if possible
-//	navigator.getBattery().then(function(battery) {
-//  battery.addEventListener('levelchange', function() {
-//    // Do stuff when the level changes, you can get it
-//    // from battery.level
-//    window.batt = (battery.level*100);
-//  });
-//  	window.batt = (battery.level*100);
-//});
-//
-//
-////     battery for values //
-//    if (UseBatteryforHue == true) {
-//        var h = window.batt * 36;
-//    } else {
-//        var h = h;
-//    }
-//    if (UseBatteryforSaturation == true) {
-//        var s = window.batt;
-//    } else {
-//        var s = s;
-//    }
-//    if (UseBatteryforLightness == true) {
-//        var l = window.batt;
-//    } else {
-//        var l = l;
-//    }
+    window.batt = window.batt;
+
+//     battery for values //
+   if (UseBatteryforHue == true) {
+       var h = window.batt * 36;
+   } else {
+       var h = h;
+   }
+   if (UseBatteryforSaturation == true) {
+       var s = window.batt;
+   } else {
+       var s = s;
+   }
+   if (UseBatteryforLightness == true) {
+       var l = window.batt;
+   } else {
+       var l = l;
+   }
 
     // Overides //
     if (HueOveride == true) {

@@ -1,4 +1,4 @@
-// Porco Rosso, 2017 - for use with Ubersicht macOS app
+// Porco Rosso, 2018 - for use with Ubersicht macOS app
 // Config below to liking
 
 // color code text opacity from 0 to 1 ; Default = 0//
