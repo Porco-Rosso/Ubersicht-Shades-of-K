@@ -1,5 +1,6 @@
 # Übersicht-Shades-of-K
 This widget sets your wallpaper to a customisable set of colour gradient bands that change with the time!
+
 `v1.0.0`
 
 Features:
